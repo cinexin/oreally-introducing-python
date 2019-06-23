@@ -52,5 +52,5 @@ print(words_ending_with_r)
 '''
 7.11. Find all words that contain exactly three vowels in a row
 '''
-words_3_vowels_in_a_row = re.findall(r'\b\w*[aeiou][aeiou][aeiou]\w*\b', mammoth)
+words_3_vowels_in_a_row = re.findall(r'\b\w*[aeiou][aeiou][aeiou][^aeiou\s]\w*\b', mammoth)
 print(words_3_vowels_in_a_row)
