@@ -1,9 +1,11 @@
+bfile='8.DataHasToGoSomewhere/binary_files/bfile'
+
 '''
 As you read and write, Python keeps track of where you are in the file
 tell() function returns your current offset from the beginning of the file, in bytes
 seek() function lets you jump to another byte offset in the file
 '''
-fin = open('bfile','rb')
+fin = open(bfile,'rb')
 fin.tell()
 fin.seek(255)
 bdata = fin.read()
@@ -22,7 +24,7 @@ print(os.SEEK_SET)
 print(os.SEEK_CUR)
 print(os.SEEK_END)
 # So, we could have read the last byte in different ways
-fin = open('bfile','rb')
+fin = open(bfile,'rb')
 fin.seek(-1,2)
 fin.tell()
 bdata = fin.read()
@@ -30,7 +32,7 @@ len(bdata)
 bdata[0]
 
 # Example of seeking from the current position in the file
-fin = open('bfile','rb')
+fin = open(bfile,'rb')
 fin.seek(254,0)
 fin.tell()
 fin.seek(1,1)

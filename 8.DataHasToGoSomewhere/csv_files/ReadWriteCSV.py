@@ -1,10 +1,12 @@
+villains_file = '8.DataHasToGoSomewhere/csv_files/villains.csv'
+
 import csv
 villains = [['Doctor','No'],['Rosa', 'Klebb'],['Mister', 'Big'],['Auric', 'Goldfinger'],['Ernst','Blofeld']]
-with open('villains','wt', newline = '') as fout:
+with open(villains_file,'wt', newline = '') as fout:
     csvout = csv.writer(fout)
     csvout.writerows(villains)
     
-with open('villains','rt') as fin:
+with open(villains_file,'rt') as fin:
     cin = csv.reader(fin)
     for row in cin:
         print(row)
@@ -15,7 +17,7 @@ with open('villains','rt') as fin:
 Data can be a list of dictionaries instead a list of lists
 '''
 import csv
-with open('villains','rt') as fin:
+with open(villains_file,'rt') as fin:
     cin = csv.DictReader(fin,fieldnames=['first','last'])
     villains = [row for row in cin]
     print(villains)
@@ -28,7 +30,7 @@ villains = [
     {'first': 'Auric', 'last': 'Goldfinger'},
     {'first': 'Ernst', 'last': 'Blofeld'},
 ]
-with open('villains', 'wt', newline = '') as fout:
+with open(villains_file, 'wt', newline = '') as fout:
     cout = csv.DictWriter(fout,['first','last'])
     cout.writeheader()
     cout.writerows(villains)
@@ -38,7 +40,7 @@ By omitting fieldnames arguments in the DictReader() call,
 we instruct to use the values in the first line of the file (first, last) as column labels
 and matching dictionary keys
 '''
-with open('villains','rt') as fin:
+with open(villains_file,'rt') as fin:
     cin = csv.DictReader(fin)
     villains = [row for row in cin]
 print(villains)
