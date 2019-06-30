@@ -1,0 +1,19 @@
+name:
+  first: James
+  last: McIntyre
+dates:
+  birth: 1828-05-25
+  death: 1906-03-31
+details:
+  bearded: true
+  themes: [cheese, Canada]
+books:
+  url: http://www.gutenberg.org/files/36068/36088-h/36068-h.htm
+poems:
+  - title: 'Motto'
+    text: Politeness, perseverance and pluck, to their possesor will bring good luck.
+  - title: 'Canadian Charms'
+    text: Here industry is not in vain, for we have bounteous crops of grain,And you behold on every field Of grass and roots abundant yield, But after all the greatest charm Is the snug home upon the farm, And stone walls now keep catlle warm.
+
+
+
