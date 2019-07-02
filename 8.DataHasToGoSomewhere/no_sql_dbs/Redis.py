@@ -74,4 +74,94 @@ conn.hgetall('song')
 conn.hsetnx('song','fa','a note that rhymes with la')
 
 # REDIS SETS
+# Add elements to a set
 conn.sadd('my_zoo','duck','goat','turkey')
+# get number of elements of a set
+conn.scard('my_zoo')
+# get all the set's values
+conn.smembers('my_zoo')
+# remove a value from the set
+conn.srem('my_zoo','turkey')
+conn.sadd('better_zoo','tiger','wolf','duck')
+# intersection of 2 sets
+conn.sinter('my_zoo','better_zoo')
+# store the intersection in another set (fowl_zoo)
+conn.sinterstore('fowl_zoo','my_zoo','better_zoo')
+conn.smembers('fowl_zoo')
+# union of 2 stes
+conn.sunion('my_zoo','better_zoo')
+# store the union in another set (fabolous_zoo)
+conn.sunionstore('fabulous_zoo','my_zoo','better_zoo')
+conn.smembers('fabulous_zoo')
+# get the diff of 2 sets (what does my_zoo have that better_zoo doesn't have?)
+conn.sdiff('my_zoo','better_zoo')
+conn.sdiffstore('zoo_sale','my_zoo','better_zoo')
+conn.smembers('zoo_sale')
+
+# SORTED SETS
+'''
+Sorted sets (or zsets) are sets of unique values, 
+each value having an associated floating point score
+You can access each item by its value or score
+Sorted sets have manu uses:
+- Leader boards
+- Secondary indexes
+- Timeseries, using timestamps as scores
+We'll se the last use case, tracking user logins via timestamps
+(Unix epoc value)
+'''
+import time
+now = time.time()
+print(now)
+
+# first guest...
+conn.zadd('logins',{'smeagol':now})
+# 5 minutes later, next guest...
+conn.zadd('logins',{'sauron':now + (5*60)})
+# 2 hours later, another guest...
+conn.zadd('logins',{'bilbo': now + (2*60*60)})
+# one day later, the last guest...
+conn.zadd('logins',{'treebeard': now + (24*60*60)})
+# in what order bilbo arrived?
+conn.zrank('logins','bilbo')
+# when was that?
+conn.zscore('logins','bilbo')
+conn.zrange('logins',0,-1)
+conn.zrange('logins',0,-1,withscores=True)
+
+# BITS
+# let's say we want to track who visited our website in an specifi range of dates...
+days = ['2013-02-25','2013-02-26','2013-02-27']
+# let's say these are user ids visiting our website in the above days
+big_spender = 1089
+tire_kicker = 40459
+late_joiner = 550212
+# with bits, we can mark who visited our website on an specific day
+# let's say, the first date or days "big_spender" and "tire_kicker" hit our website...
+conn.setbit(days[0],big_spender,1)
+conn.setbit(days[0],tire_kicker,1)
+# the next day, "big_spender" came back...
+conn.setbit(days[1],big_spender,1)
+# the last day, "big_spender" came back again, and a new user too
+conn.setbit(days[2],big_spender,1)
+conn.setbit(days[2],late_joiner,1)
+# Let's get the daily visitor count for these 3 days...
+# not working in my local redis server...(ouch!)
+for day in days:
+    print(day)
+    conn.bitcount(day)
+
+conn.getbit(days[1],tire_kicker)
+
+# CACHE AND EXPIRATION
+# We can use the expire() function to instruct Redis how long to keep the key
+# by default, it keeps the key forever
+# the expiration value is a number of seconds
+import time
+key = 'now you see it'
+conn.set(key,'but not for long')
+conn.expire(key,5)
+conn.ttl(key)
+conn.get(key)
+time.sleep(6)
+conn.get(key)
