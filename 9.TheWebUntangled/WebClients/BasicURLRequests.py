@@ -15,6 +15,8 @@ try:
     js_data = json.loads(str_data)
     items = js_data['items']
     volumeInfo = items[0]['volumeInfo']
+    print('Title:', volumeInfo['title'])
     print('Authors:', volumeInfo['authors'])
+    print('Summary:', volumeInfo['description'])
 except:
     print('Error when parsing json data...')
