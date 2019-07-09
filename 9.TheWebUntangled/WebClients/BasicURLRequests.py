@@ -20,3 +20,7 @@ try:
     print('Summary:', volumeInfo['description'])
 except:
     print('Error when parsing json data...')
+    
+# what other http headers are in the connection?
+for key,value in conn.getheaders():
+    print(key,value)
