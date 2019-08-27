@@ -1,0 +1,4 @@
+France, Paris
+venuzuela,caracas
+LithuniaA,vilnius
+    quit
