@@ -31,3 +31,7 @@ print ("Square of %d is %f" %(100, math.sqrt(100.0)))
 # rad to degrees and vice-versa...
 print ("%.1f degrees are %f radians" %(180.0, math.radians(180.0)))
 print ("%f radians are %.1f degrees" %(math.pi, math.degrees(math.pi)))
+# imaginary numbers...
+print(8j)
+print((3 + 2j))
+print(1j * 1j)
